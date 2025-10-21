@@ -1,8 +1,8 @@
 {
 	"name": "hsublog",
 	"type": "module",
-	"version": "0.19.1",
-	"description": "A modern Astro theme focused on content creation",
+	"version": "0.0.1",
+	"description": "KraHsu's personal blog powered by Astro and Astro Theme Thought Lite.",
 	"keywords": [
 		"astro",
 		"theme",
