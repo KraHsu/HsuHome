@@ -7,7 +7,9 @@ import i18nit from "$i18n";
 import { render } from "astro:content";
 
 export async function getStaticPaths() {
-	return i18n?.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+	return i18n?.locales.map(locale => ({
+		params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) }
+	}));
 }
 
 const { locale = i18n!.defaultLocale } = Astro.params;
@@ -30,6 +32,14 @@ let chronicle = information.find(info => info.id == "chronicle")?.data;
 let chronicles = Object.entries<string[]>(chronicle ?? {})
 	.map(([date, events]) => ({ date: new Date(date), events: events ?? [] }))
 	.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+// 你可以改这里：作者信息 & 照片路径
+const author = {
+	name: "KraHsu",
+	title: "BIT Dr.",
+	photo: "/images/author.png",
+	intro: "Stay hungry, stay foolish."
+};
 ---
 
 <style lang="less">
@@ -39,10 +49,78 @@ let chronicles = Object.entries<string[]>(chronicle ?? {})
 
 			h1 {
 				margin-bottom: 1rem;
-
 				font-size: 1.8rem;
 			}
 		}
+	}
+
+	.author-card {
+		position: relative;
+		padding: 1.25rem;
+		border-radius: 1rem;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.4));
+		box-shadow:
+			0 1px 2px rgba(0, 0, 0, 0.06),
+			0 10px 30px rgba(0, 0, 0, 0.06);
+		backdrop-filter: blur(6px);
+		border: 1px solid rgba(125, 125, 125, 0.12);
+	}
+
+	.author-avatar {
+		width: 180px;
+		height: 180px;
+		border-radius: 9999px;
+		object-fit: cover;
+		display: block;
+		margin: 0 auto;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		border: 3px solid rgba(255, 255, 255, 0.85);
+	}
+
+	.author-name {
+		margin-top: 0.9rem;
+		margin-bottom: 0.1rem;
+		font-weight: 700;
+		font-size: 1.125rem;
+		text-align: center;
+		letter-spacing: 0.2px;
+	}
+
+	.author-title {
+		text-align: center;
+		font-size: 0.92rem;
+		color: #6b7280;
+		margin-bottom: 0.5rem;
+	}
+
+	.author-intro {
+		text-align: center;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #374151;
+	}
+
+	/* 渐变分割线 */
+	.author-divider {
+		height: 1px;
+		margin: 0.9rem auto 0.8rem;
+		width: 85%;
+		background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.12), transparent);
+	}
+
+	/* 暗色模式（若站点有 dark class，则细化一下观感） */
+	:global([data-theme="dark"]) .author-card {
+		background: linear-gradient(180deg, rgba(24, 24, 27, 0.66), rgba(24, 24, 27, 0.4));
+		border-color: rgba(255, 255, 255, 0.06);
+	}
+	:global([data-theme="dark"]) .author-title {
+		color: #9ca3af;
+	}
+	:global([data-theme="dark"]) .author-intro {
+		color: #e5e7eb;
+	}
+	:global([data-theme="dark"]) .author-divider {
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
 	}
 </style>
 
@@ -72,7 +150,20 @@ let chronicles = Object.entries<string[]>(chronicle ?? {})
 		</article>
 
 		<aside class="flex flex-col justify-between flex-basis-300px flex-shrink-0 mb-3 pl-5">
-			<ul class="list-none">
+			{/* 作者 */}
+			<section class="author-card mb-4">
+				<figure style="margin:0;">
+					<img src={author.photo} alt={`${author.name} portrait`} width="400" height="400" loading="lazy" decoding="async" class="author-avatar" />
+					<figcaption class="sr-only">{author.name}</figcaption>
+				</figure>
+				<div class="author-name">{author.name}</div>
+				<div class="author-title">{author.title}</div>
+				<div class="author-divider"></div>
+				<p class="author-intro">{author.intro}</p>
+			</section>
+
+			{/* 时间轴 */}
+			<ul class="list-none ml-5">
 				{
 					chronicles.map(chronicle => (
 						<li class="relative mb-2 pb-2 before:(absolute content-empty top-3.4 left--3.8 h-full b-l-2 b-l-solid b-primary) last:after:(absolute content-empty left--5 bottom--4 w-2 h-2 b-2 b-solid b-primary rd-full bg-primary)">
