@@ -9,5 +9,8 @@
 			],
 			"url": ".vscode/site.schema.json"
 		}
-	]
+	],
+	"i18n-ally.sourceLanguage": "zh-cn",
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"i18n-ally.keystyle": "nested"
 }

@@ -9,16 +9,18 @@ import Heatmap from "$components/Heatmap.svelte";
 import config from "$config";
 import i18nit from "$i18n";
 
+// 默认语言不添加前缀
 export async function getStaticPaths() {
-	// Create path for each locale, omitting default locale from URL
-	return i18n!.locales.map(locale => ({ params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } }));
+	return i18n!.locales.map(locale => {
+		return { params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) } };
+	});
 }
 
 const { locale = i18n!.defaultLocale } = Astro.params;
 
 const t = i18nit(locale);
 
-// Get preface content for current locale, sorted by timestamp (newest first)
+// 按时间序获取前言
 const prefaces = (
 	await getCollection("preface", preface => {
 		// Extract language and ID from file path structure
@@ -30,7 +32,7 @@ const prefaces = (
 	})
 ).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
 
-// Get published notes for current locale, sorted by timestamp (newest first)
+// 按时间序获取发布的笔记
 const notes = (
 	await getCollection("note", note => {
 		// Extract language and note ID from file path structure
@@ -41,7 +43,7 @@ const notes = (
 	})
 ).sort((a, b) => b.data.timestamp.getTime() - a.data.timestamp.getTime());
 
-// Get published jottings for current locale
+// 按时间序获取发布的随笔
 const jottings = await getCollection("jotting", jotting => {
 	// Extract language and jotting ID from file path structure
 	const [language] = jotting.id.split("/");
@@ -62,6 +64,7 @@ const { Content } = preface ? await render(preface) : ({} as any);
 		<header class="flex items-center justify-center flex-wrap-reverse grow-0.6">
 			{config.prologue && <article class="mr-a font-cursive font-thin text-size-xl sm:text-size-2xl line-height-loose whitespace-pre-line">{config.prologue}</article>}
 			<!-- <Icon name="site-logo" size={100} is:inline /> -->
+			<img id="site-logo" src="favicon-96x96.png" style="width: 100px; height: 100px;" />
 		</header>
 
 		{
@@ -104,3 +107,9 @@ const { Content } = preface ? await render(preface) : ({} as any);
 		}
 	</main>
 </Base>
+
+<style is:global>
+	[data-theme="dark"] #site-logo {
+		filter: invert(1);
+	}
+</style>

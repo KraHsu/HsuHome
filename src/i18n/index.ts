@@ -1,6 +1,5 @@
 import { i18n } from "astro:config/client";
 
-// Import translation files for different locales
 import zhCN from "./zh-cn.yaml";
 import en from "./en.yaml";
 import ja from "./ja.yaml";

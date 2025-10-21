@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig, passthroughImageService } from "astro/config";
 import yaml from "@rollup/plugin-yaml";
 import sitemap from "@astrojs/sitemap";
@@ -40,7 +39,7 @@ export default defineConfig({
   trailingSlash: "never",
   i18n: {
     locales: ["en", "zh-cn", "ja"],
-    defaultLocale: "en",
+    defaultLocale: "zh-cn",
     routing: {
       redirectToDefaultLocale: false,
       prefixDefaultLocale: false,
@@ -105,7 +104,10 @@ export default defineConfig({
     }
   },
   vite: {
-    plugins: [yaml()]
+    plugins: [
+      // @ts-expect-error: rollup 和 vite 定义不兼容
+      yaml(),
+    ]
   },
   integrations: [
     svelte(),

@@ -27,15 +27,18 @@ const { title, subtitle, description, author, article } = Astro.props;
 		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&family=Noto+Serif:ital,wght@1,200..900&family=Playwrite+MX:wght@100..400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+		<!-- 中文字体 -->
+		<link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@ibm/plex-sans-sc@1.1.0/css/ibm-plex-sans-sc-all.min.css" onload="this.onload=null;this.rel='stylesheet'" />
+		{(Astro.currentLocale === "zh-hk" || Astro.currentLocale === "zh-mo" || Astro.currentLocale === "zh-tw") && <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@ibm/plex-sans-tc@1.1.1/fonts/split/woff2/hinted/IBMPlexSansTC-Light.min.css" onload="this.onload=null;this.rel='stylesheet'" />}
+		{Astro.currentLocale === "ja" && <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans-jp@5.2.8/index.min.css" onload="this.onload=null;this.rel='stylesheet'" />}
+
+		<!-- MONO字体 -->
 		<link rel="preload" as="style" href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" as="style" href="https://fontsapi.zeoseven.com/556/main/result.css" onload="this.onload=null;this.rel='stylesheet'" />
-		<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.4/katex.min.css" onload="this.onload=null;this.rel='stylesheet'" />
 
-		{(Astro.currentLocale === "zh-hk" || Astro.currentLocale === "zh-mo") && <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@200..900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />}
-		{Astro.currentLocale === "zh-tw" && <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />}
-		{Astro.currentLocale === "ja" && <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />}
-		{Astro.currentLocale === "ko" && <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />}
+		<!-- <link rel="preload" as="style" href="https://fontsapi.zeoseven.com/442/main/result.css" onload="this.onload=null;this.rel='stylesheet'" />
+		<link rel="preload" as="style" href="https://fontsapi.zeoseven.com/556/main/result.css" onload="this.onload=null;this.rel='stylesheet'" /> -->
+		<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.4/katex.min.css" onload="this.onload=null;this.rel='stylesheet'" />
 
 		<script is:inline>
 			var theme = localStorage.getItem("theme");
