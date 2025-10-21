@@ -187,6 +187,7 @@ export default defineConfig({
           "github",
           "google",
           "x",
+          "bilibili",
         ],
         "svg-spinners": [
           "3-dots-move",
