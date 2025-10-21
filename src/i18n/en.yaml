@@ -30,6 +30,7 @@ navigation:
   policy: Policy
   preface: Preface
   subscription: Subscription
+  tools: tools
 note:
   contents: Contents
   series: Series
@@ -53,4 +54,4 @@ sensitive:
   warning: If this content might affect your mental health, please leave immediately!
 statistics: Wrote {words} words
 theme: 'Theme: ThoughtLite'
-repo: 'Git Repo'
+repo: Git Repo

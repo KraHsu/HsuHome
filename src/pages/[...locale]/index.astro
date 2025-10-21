@@ -63,7 +63,7 @@ const { Content } = preface ? await render(preface) : ({} as any);
 		<header class="relative md:h-[40vh] md:min-h-40 sm:h-[20vh] sm:min-h-20 p-0">
 			{config.prologue && <article class="top-0 left-0 z-10 max-w-[36ch] font-cursive font-thin text-xl sm:text-2xl leading-loose whitespace-pre-line">{config.prologue}</article>}
 
-			<img id="site-logo" src="crow-logo.png" alt="Site logo" class="ratio-img absolute bottom-0 right-0 z-0 max-h-[calc(100%-2.5rem)] max-w-[50%] opacity-95 pointer-events-none select-none" />
+			<img id="site-logo" src="/crow-logo.png" alt="Site logo" class="dt:invert-100 ratio-img absolute bottom-0 right-0 z-0 max-h-[calc(100%-2.5rem)] max-w-[50%] opacity-95 pointer-events-none select-none" />
 		</header>
 
 		{
@@ -106,9 +106,3 @@ const { Content } = preface ? await render(preface) : ({} as any);
 		}
 	</main>
 </Base>
-
-<style is:global>
-	[data-theme="dark"] #site-logo {
-		filter: invert(1);
-	}
-</style>

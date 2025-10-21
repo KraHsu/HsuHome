@@ -179,7 +179,8 @@ export default defineConfig({
           "user-round",
           "user-round-pen",
           "user-round-x",
-          "x"
+          "gavel",
+          "x",
         ],
         "simple-icons": [
           "astro",

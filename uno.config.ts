@@ -1,11 +1,30 @@
-import { defineConfig } from "unocss";
-import VariantGroup from "@unocss/transformer-variant-group";
-import Directives from "@unocss/transformer-directives";
+import { defineConfig } from 'unocss';
+
+import transformerDirectives from '@unocss/transformer-directives';
+import transformerVariantGroup from '@unocss/transformer-variant-group';
+import presetWind3 from '@unocss/preset-wind3';
+import presetAttributify from '@unocss/preset-attributify';
 
 export default defineConfig({
 	transformers: [
-		VariantGroup(),
-		Directives(),
+		transformerVariantGroup(),
+		transformerDirectives(),
+	],
+	presets: [
+		presetWind3(),
+		presetAttributify(),
+	],
+	variants: [
+		{
+			name: 'dt',
+			match(matcher) {
+				if (!matcher.startsWith('dt:')) return;
+				return {
+					matcher: matcher.slice(3),
+					selector: s => `[data-theme="dark"] ${s}`,
+				}
+			},
+		},
 	],
 	rules: [
 		["invisible", { visibility: 'hidden' }]
