@@ -5,7 +5,7 @@
         <section v-for="tool in filtered" :key="tool.id"
           class="flex flex-col sm:flex-row items-start sm:items-start justify-between gap-2 card">
 
-          <div class="flex flex-col gap-1 max-w-[520px]">
+          <div class="flex flex-col gap-1 max-w-[520px] min-w-[520px]">
             <div class="flex gap-2 items-center flex-wrap">
               <span v-if="tool.data.top > 0" class="color-yellow-600 dt:color-yellow-400">
                 <slot name="top" />
