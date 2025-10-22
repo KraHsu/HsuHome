@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import { i18n } from "astro:config/client";
+import Base from "$layouts/Base.astro";
+import Icon from "$components/Icon.astro";
+import i18nit from "$i18n";
+import ToolGrid from "$components/tool/ToolGrid.vue";
+
+export async function getStaticPaths() {
+	return i18n!.locales.map(locale => ({
+		params: { locale: locale == i18n?.defaultLocale ? undefined : (locale as string) }
+	}));
+}
+
+const { locale = i18n!.defaultLocale } = Astro.params;
+const t = i18nit(locale);
+
+// 读取 tool 集合并按语言过滤
+const tools = await getCollection("tool", entry => {
+	const [language] = entry.id.split("/");
+	const published = !entry.data.draft;
+	const localed = language === locale;
+	return published && localed;
+});
+
+// 标准化
+let list = tools.map(tool => ({
+	id: tool.id,
+	data: {
+		title: tool.data.title,
+		timestamp: tool.data.timestamp,
+		series: tool.data.series,
+		tags: tool.data.tags,
+		top: tool.data.top,
+		sensitive: tool.data.sensitive,
+		description: tool.data.description,
+		link: tool.data.link,
+		repo: tool.data.repo
+	}
+}));
+
+// 所有 series / tags
+const series = Array.from(new Set(tools.map(it => it.data.series).filter(Boolean))).sort() as (string[]);
+const tags = Array.from(new Set(tools.flatMap(it => it.data.tags).filter(Boolean))).sort();
+---
+
+<Base title={t("navigation.tools") ?? "Tools"} {locale}>
+	<main class="flex flex-col grow">
+		<ToolGrid client:load locale={locale} tools={list} {series} {tags}>
+			<Icon name="lucide:bookmark" slot="series" />
+			<Icon name="lucide:tag" slot="tag" />
+			<Icon name="lucide:flag-triangle-right" slot="top" />
+			<Icon name="lucide:siren" title={t("sensitive.icon")} slot="sensitive" />
+			<Icon name="lucide:ellipsis" slot="dots" />
+			<Icon name="lucide:external-link" slot="visit" />
+			<Icon name="lucide:github" slot="repo" />
+		</ToolGrid>
+	</main>
+</Base>

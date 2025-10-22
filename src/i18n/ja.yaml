@@ -49,3 +49,7 @@ sensitive:
 statistics: '{words} 文字を書いた'
 theme: 'テーマ: ThoughtLite'
 repo: Git リポジトリ
+tool:
+  visit: アクセス
+  series: 系列
+  tag: 付札

@@ -55,3 +55,7 @@ sensitive:
 statistics: Wrote {words} words
 theme: 'Theme: ThoughtLite'
 repo: Git Repo
+tool:
+  visit: visit
+  series: Series
+  tag: Tags

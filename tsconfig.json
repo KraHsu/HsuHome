@@ -2,8 +2,9 @@
   "extends": "astro/tsconfigs/strict",
   "include": [
     ".astro/types.d.ts",
-    "**/*"
-, ".vscode/config.schema.json"  ],
+    "**/*",
+    ".vscode/config.schema.json"
+  ],
   "exclude": [
     "dist"
   ],
@@ -40,6 +41,7 @@
       "$config": [
         "site.config.json"
       ]
-    }
+    },
+    "jsx": "preserve"
   }
 }

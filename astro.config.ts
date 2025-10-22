@@ -33,6 +33,8 @@ import wrapper from "./src/utils/remark/table-wrapper";
 import copy from "./src/utils/code-copy";
 import reading from "./src/utils/remark/reading";
 
+import vue from "@astrojs/vue";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.krahsu.top",
@@ -109,93 +111,91 @@ export default defineConfig({
       yaml(),
     ]
   },
-  integrations: [
-    svelte(),
-    sitemap(),
-    swup({
-      globalInstance: true,
-      preload: false,
-      smoothScrolling: false,
-      progress: true
-    }),
-    UnoCSS({
-      injectReset: "@unocss/reset/normalize.css"
-    }),
-    icon({
-      include: {
-        "fa6-brands": [
-          "creative-commons",
-          "creative-commons-by",
-          "creative-commons-sa",
-          "creative-commons-nc",
-          "creative-commons-nd",
-          "creative-commons-zero"
-        ],
-        lucide: [
-          "activity",
-          "align-justify",
-          "arrow-left",
-          "arrow-right",
-          "arrow-up-to-line",
-          "at-sign",
-          "calendar",
-          "circle-alert",
-          "circle-check",
-          "circle-question-mark",
-          "circle-x",
-          "clock-arrow-down",
-          "clock-arrow-up",
-          "copyright",
-          "earth",
-          "ellipsis",
-          "feather",
-          "file-search",
-          "flag-triangle-right",
-          "hash",
-          "history",
-          "house",
-          "info",
-          "layers",
-          "list",
-          "log-out",
-          "message-square",
-          "moon",
-          "pencil",
-          "pilcrow",
-          "refresh-cw",
-          "reply",
-          "rss",
-          "scale",
-          "send",
-          "share-2",
-          "signature",
-          "siren",
-          "smile",
-          "sun",
-          "tent",
-          "timer",
-          "trash",
-          "triangle-alert",
-          "user-round",
-          "user-round-pen",
-          "user-round-x",
-          "gavel",
-          "x",
-        ],
-        "simple-icons": [
-          "astro",
-          "svelte",
-          "github",
-          "google",
-          "x",
-          "bilibili",
-        ],
-        "svg-spinners": [
-          "3-dots-move",
-          "pulse-3",
-          "pulse-rings-3"
-        ]
-      }
-    })
-  ]
+  integrations: [svelte(), vue(), sitemap(), swup({
+    globalInstance: true,
+    preload: false,
+    smoothScrolling: false,
+    progress: true
+  }), UnoCSS({
+    injectReset: "@unocss/reset/normalize.css"
+  }), icon({
+    include: {
+      "fa6-brands": [
+        "creative-commons",
+        "creative-commons-by",
+        "creative-commons-sa",
+        "creative-commons-nc",
+        "creative-commons-nd",
+        "creative-commons-zero"
+      ],
+      lucide: [
+        "activity",
+        "align-justify",
+        "arrow-left",
+        "arrow-right",
+        "arrow-up-to-line",
+        "at-sign",
+        "calendar",
+        "circle-alert",
+        "circle-check",
+        "circle-question-mark",
+        "circle-x",
+        "clock-arrow-down",
+        "clock-arrow-up",
+        "copyright",
+        "earth",
+        "ellipsis",
+        "feather",
+        "file-search",
+        "flag-triangle-right",
+        "hash",
+        "history",
+        "house",
+        "info",
+        "layers",
+        "list",
+        "log-out",
+        "message-square",
+        "moon",
+        "pencil",
+        "pilcrow",
+        "refresh-cw",
+        "reply",
+        "rss",
+        "scale",
+        "send",
+        "share-2",
+        "signature",
+        "siren",
+        "smile",
+        "sun",
+        "tent",
+        "timer",
+        "trash",
+        "triangle-alert",
+        "user-round",
+        "user-round-pen",
+        "user-round-x",
+        "gavel",
+        "bookmark",
+        "tag",
+        "external-link",
+        "github",
+        "x",
+      ],
+      "simple-icons": [
+        "astro",
+        "svelte",
+        "github",
+        "google",
+        "x",
+        "bilibili",
+      ],
+      "svg-spinners": [
+        "3-dots-move",
+        "pulse-3",
+        "pulse-rings-3"
+      ]
+    }
+  })]
 });

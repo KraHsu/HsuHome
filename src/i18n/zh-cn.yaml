@@ -48,4 +48,8 @@ sensitive:
   warning: 若这些内容可能影响您的心理健康，请立即离开！
 statistics: 写下 {words} 字
 theme: '主题: ThoughtLite'
-repo: 'Git 仓库'
+repo: Git 仓库
+tool:
+  visit: 访问
+  series: 系列
+  tag: 标签

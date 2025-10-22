@@ -60,4 +60,22 @@ const information = defineCollection({
 	loader: glob({ pattern: "**/*.(md|yaml)", base: "./src/content/information" })
 });
 
-export const collections = { note, jotting, preface, information };
+const tool = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    timestamp: z.date(),
+    series: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    top: z.number().default(0),
+    sensitive: z.boolean().default(false),
+    // 展示用
+    description: z.string().optional(),
+    link: z.string().url().optional(),
+    repo: z.string().url().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+
+export const collections = { note, jotting, preface, information, tool };

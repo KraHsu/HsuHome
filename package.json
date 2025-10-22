@@ -26,6 +26,7 @@
 	},
 	"scripts": {
 		"new": "tsx scripts/new.ts",
+		"time": "tsx scripts/time.ts",
 		"dev": "astro dev",
 		"check": "astro check",
 		"build": "astro build",
@@ -37,6 +38,7 @@
 		"@astrojs/markdown-remark": "^6.3.8",
 		"@astrojs/sitemap": "^3.6.0",
 		"@astrojs/svelte": "^7.2.0",
+		"@astrojs/vue": "^5.1.1",
 		"@hbsnow/rehype-sectionize": "^1.0.7",
 		"@iconify-json/fa6-brands": "^1.2.6",
 		"@iconify-json/lucide": "^1.2.69",
@@ -77,7 +79,8 @@
 		"unist-util-find-all-after": "^5.0.0",
 		"unist-util-find-all-before": "^5.0.0",
 		"unist-util-find-between-all": "^1.1.0",
-		"unist-util-visit": "^5.0.0"
+		"unist-util-visit": "^5.0.0",
+		"vue": "^3.5.22"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
